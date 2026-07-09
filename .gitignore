@@ -1,0 +1,28 @@
+# .NET
+backend/**/bin/
+backend/**/obj/
+
+# Visual Studio
+backend/.vs/
+backend/**/*.user
+backend/**/*.rsuser
+backend/**/*.suo
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Logs
+*.log
+
+# AppSettings de desenvolvimento
+backend/**/appsettings.Development.json
+
+# Docker
+docker-compose.override.yml
+
+# Node (caso exista frontend)
+frontend/node_modules/
+frontend/dist/
