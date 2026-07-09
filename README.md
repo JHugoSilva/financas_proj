@@ -1,54 +1,53 @@
-## 🐳 Executando o banco de dados com Docker
+## 🐳 Executando o projeto com Docker
 
-Caso não tenha o PostgreSQL instalado, execute o container abaixo.
+O projeto utiliza **Docker Compose** para subir os seguintes serviços:
 
-### docker-compose.yml
+- PostgreSQL 16
+- pgAdmin 4
+- Frontend React (Vite)
 
-```yaml
-services:
-  postgres:
-    image: postgres:16
-    container_name: postgres-db
-    restart: unless-stopped
+### Subindo os containers
 
-    environment:
-      POSTGRES_DB: finance_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-
-    ports:
-      - "5432:5432"
-
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
-```
-
-Inicie o banco:
+Na raiz do projeto execute:
 
 ```bash
 docker compose up -d
 ```
 
-Verifique se o container está em execução:
+Verifique se os containers estão em execução:
 
 ```bash
 docker ps
 ```
 
+### Serviços disponíveis
+
+| Serviço | URL | Credenciais |
+|---------|-----|-------------|
+| React | http://localhost:5173 | - |
+| pgAdmin | http://localhost:5050 | admin@admin.com / admin |
+| PostgreSQL | localhost:5432 | postgres / postgres |
+
+### Banco de dados
+
+| Configuração | Valor |
+|--------------|-------|
+| Database | finance_db |
+| Usuário | postgres |
+| Senha | postgres |
+| Porta | 5432 |
+
 ---
 
 ## ⚙️ Configuração da API
 
-Edite o arquivo:
+Configure a connection string em:
 
 ```text
 backend/financas.Api/appsettings.json
 ```
 
-Configure a conexão com o banco:
+Exemplo:
 
 ```json
 {
@@ -60,30 +59,7 @@ Configure a conexão com o banco:
 
 ---
 
-## 🗄️ Executando as Migrations
-
-Dentro da pasta **backend** execute:
-
-```bash
-cd backend
-```
-
-Aplicar as migrations:
-
-```bash
-dotnet ef database update
-```
-
-Caso ainda não existam migrations:
-
-```bash
-dotnet ef migrations add InitialCreate
-dotnet ef database update
-```
-
----
-
-## ▶️ Executando a API
+## 🗄️ Aplicando as Migrations
 
 Entre na pasta do backend:
 
@@ -92,114 +68,56 @@ cd backend
 ```
 
 Execute:
+- Baixa e restaura os pacotes NuGet do projeto:
+```bash
+dotnet restore
+```
+- Execute as migrations:
+```bash
+dotnet ef database update
+```
+
+---
+
+## ▶️ Executando a API
+
+Ainda na pasta `backend`:
 
 ```bash
-dotnet run --project financas.Api
+dotnet run
 ```
 
 A API ficará disponível em:
 
 ```text
-https://localhost:5001
+http://localhost:5161
 ```
-
-ou
-
-```text
-http://localhost:5000
-```
-
-Swagger:
-
-```text
-https://localhost:5001/swagger
-```
-
+Já esta configurado para abrir diretamente o Swagger
 ---
 
-# ⚛️ Front-end React
+## 🚀 Acessar o projeto completo
 
-Entre na pasta do frontend:
-
-```bash
-cd frontend
-```
-
-Instale as dependências:
-
-```bash
-npm install
-```
-
-Execute a aplicação:
-
-```bash
-npm run dev
-```
-
-O React ficará disponível em:
-
-```text
-http://localhost:5173
-```
-
----
-
-## 📂 Estrutura do projeto
-
-```text
-projeto
-├── backend
-│   ├── financas.Api
-│   ├── financas.Application
-│   ├── financas.Domain
-│   └── financas.Infrastructure
-│
-├── frontend
-│   ├── src
-│   ├── public
-│   ├── package.json
-│   └── vite.config.ts
-│
-├── docker-compose.yml
-└── README.md
-```
-
----
-
-## 🚀 Executando o projeto completo
-
-### 1. Suba o PostgreSQL
+<!-- 1. Suba os containers:
 
 ```bash
 docker compose up -d
 ```
 
-### 2. Execute as migrations
+2. Execute as migrations:
 
 ```bash
 cd backend
 dotnet ef database update
 ```
 
-### 3. Execute a API
+3. Execute a API:
 
 ```bash
-dotnet run --project financas.Api
-```
+dotnet run
+``` -->
 
-### 4. Execute o Front-end
+Acesse:
 
-Em outro terminal:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-Agora acesse:
-
-- **Frontend:** http://localhost:5173
-- **API:** http://localhost:5000
-- **Swagger:** http://localhost:5000/swagger# financas_proj
+- Frontend: http://localhost:5173
+- Swagger: http://localhost:5161
+- pgAdmin: http://localhost:5050
