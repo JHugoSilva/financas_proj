@@ -26,7 +26,7 @@ export default function SummaryTable({
           </div>
 
           <div className="rounded-lg bg-blue-50 p-4 border border-blue-200">
-            <p className="text-sm text-gray-600">Saldo Total</p>
+            <p className="text-sm text-gray-600">Saldo Líquido</p>
             <p
               className={`text-2xl font-bold ${(summary?.totalSaldo ?? 0) >= 0
                 ? "text-blue-600"
