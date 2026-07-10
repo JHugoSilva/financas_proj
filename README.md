@@ -89,9 +89,8 @@ dotnet run
 
 A API ficará disponível em:
 
-```text
 http://localhost:5161
-```
+
 Já esta configurado para abrir diretamente o Swagger
 ---
 
