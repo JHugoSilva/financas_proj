@@ -32,6 +32,7 @@ docker ps
 
 | Configuração | Valor |
 |--------------|-------|
+| Host | postgres-db |
 | Database | finance_db |
 | Usuário | postgres |
 | Senha | postgres |
